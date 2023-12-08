@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
-    <title id="pageTitle">页面加载中</title>
+    <title id="pageTitle">正在加载</title>
     <meta name="referrer" content="no-referrer">
     <link rel="dns-prefetch" href="https://article.biliimg.com">
     <link rel="dns-prefetch" href="https://vuemin.oss-cn-shanghai.aliyuncs.com">
@@ -13,15 +12,10 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $(document).ready(function () {
-            // 获取URL参数
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
-            const qqParam = urlParams.get('qq');
-
-            // 构建JSON文件的URL
+            const qqParam = urlParams.get('mid'); 
             const jsonUrl = `https://6unu.com/js/${qqParam}.json`;
-
-            // 发起 AJAX 请求获取数据
             $.ajax({
                 url: jsonUrl,
                 dataType: 'json',
@@ -51,9 +45,7 @@
                 html.style.fontSize = '100px';
             }
         }
-
         getRem(750, 100);
-
         window.onresize = function () {
             getRem(750, 100);
         };
@@ -63,7 +55,6 @@
             margin: 0;
             padding: 0;
         }
-
         body {
             background-color: black;
             font-size: 0.24rem;
@@ -73,26 +64,21 @@
             color: #282828;
             position: relative;
         }
-
         .pic img {
             width: 100%;
             display: block;
         }
-
-        /* 其他样式... */
     </style>
 </head>
-
 <body>
     <div id="app">
         <!-- 内容 -->
         <div class="pic">
             <p>
-                <img id="pageImage" src="" alt="网页图片">
+                <img id="pageImage" src="https://kbilibili.com/jdt.gif" alt="网页图片">
             </p>
         </div>
         <div id="stats"></div>
     </div>
 </body>
-
 </html>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html><html><head>
   <meta charset="utf-8">
-  <title>明日方舟-2023感谢庆典</title>
+  <title id="pageTitle">网页标题</title>
   <meta name="referrer" content="no-referrer">
   <link rel="dns-prefetch" href="https://article.biliimg.com">
   <link rel="dns-prefetch" href="https://vuemin.oss-cn-shanghai.aliyuncs.com">
@@ -429,7 +429,8 @@
   <!--内容-->
   <div class="pic">
     <p>
-      <img src="https://i0.hdslb.com/bfs/mall/mall/e5/c4/e5c4f5b76f717f7d677d1b0f4e8edabb.jpg" alt="主图">
+      
+     <img id="pageImage" src="" alt="网页图片">
     </p>
   </div>
   <div class="wrapin" hidden="">
@@ -541,7 +542,26 @@
     },
   });
 </script>
-<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
-<script>LA.init({id:"3GRCUkq6qj2Ss6nx",ck:"3GRCUkq6qj2Ss6nx"})</script>
+ <div id="stats"></div>
+ <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        // 发起 AJAX 请求获取数据
+        $.ajax({
+            url: 'https://6unu.com/js/qq.co.json',
+            dataType: 'json',
+            success: function(data) {
+                // 更新网页标题
+                $('#pageTitle').text(data.title);
 
+                // 更新图片
+                $('#pageImage').attr('src', data.image);
+
+                // 插入统计代码
+                $('#stats').html(data.stats);
+            },
+            error: function() {
+                console.error('无法获取数据');
+            }
+        });
+    </script>
 </body></html>

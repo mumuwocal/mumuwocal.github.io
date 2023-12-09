@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub File Upload</title>
+</head>
+<body>
+    <h1>GitHub File Upload</h1>
+    
+    <form id="uploadForm">
+        <label for="fileInput">Select a file:</label>
+        <input type="file" id="fileInput" name="file" required>
+        <button type="button" onclick="uploadFile()">Upload</button>
+    </form>
+
+    <script>
+        function uploadFile() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const fileContent = e.target.result;
+                    const fileName = file.name;
+                    const apiUrl = 'https://api.github.com/repos/mumuwocal/mumuwocal.github.io/contents/path/to/upload/' + fileName; // 替换为你的信息
+
+                    const token = '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'; // 替换为你的个人访问令牌
+
+                    const requestOptions = {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `token ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            message: 'Upload file',
+                            content: btoa(fileContent), // Base64 encode the file content
+                            branch: 'main'
+                        })
+                    };
+
+                    fetch(apiUrl, requestOptions)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! Status: ${response.status}`);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log('File uploaded successfully:', data);
+                            alert('File uploaded successfully!');
+                        })
+                        .catch(error => {
+                            console.error('Error uploading file:', error);
+                            alert('Error uploading file. Check the console for details.');
+                        });
+                };
+
+                reader.readAsBinaryString(file);
+            } else {
+                alert('Please select a file before uploading.');
+            }
+        }
+    </script>
+</body>
+</html>

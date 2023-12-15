@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect Page</title>
+    <script>
+        // 获取 URL 参数的函数
+        function getUrlParameter(name) {
+            name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // 在页面加载时进行重定向
+        window.onload = function () {
+            // 获取 "url" 参数的值
+            var urlParameter = getUrlParameter('url');
+
+            // 如果有有效的 URL 参数，则进行重定向
+            if (urlParameter !== '') {
+                window.location.href = urlParameter;
+            }
+        };
+    </script>
+</head>
+<body>
+    <p>页面正在重定向...</p>
+</body>
+</html>

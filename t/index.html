@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>跳转中</title><script>
+        function redirectToUrl() {
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const tValue = urlParams.get('t');
+
+            if (tValue) {
+                const jsonUrl = 'https://t.kbilibili.com/t.json';
+
+                fetch(jsonUrl)
+                    .then(response => response.json())
+                    .then(jsonData => {
+
+                        const targetUrl = jsonData[tValue];
+
+                        if (targetUrl) {
+                            window.location.href = targetUrl;
+                        } else {
+                            console.error('找不到对应的链接');
+                        }
+                    })
+                    .catch(error => console.error('获取 JSON 数据失败', error));
+            } else {
+                console.error('缺少 t 值');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', redirectToUrl);
+    </script></head><body><p>跳转中...</p></body></html>
